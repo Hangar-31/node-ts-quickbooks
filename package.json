@@ -1,7 +1,7 @@
 {
-  "name": "node-ts-quickbooks-payments",
-  "version": "0.0.1",
-  "description": "",
+  "name": "node-ts-quickbooks",
+  "version": "0.0.0",
+  "description": "Node SDK for Quickbooks with types",
   "scripts": {
     "tsc:w": "tsc -w",
     "prepublish": "tsc",
@@ -41,5 +41,13 @@
     "got": "^11.8.2",
     "ts-node": "^10.1.0",
     "uuid": "^8.3.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hangar-31/node-ts-quickbooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hangar-31/node-ts-quickbooks/issues"
+  },
+  "homepage": "https://github.com/Hangar-31/node-ts-quickbooks#readme"
 }
