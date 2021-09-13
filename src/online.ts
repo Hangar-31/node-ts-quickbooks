@@ -174,12 +174,12 @@ export default class QuickbooksOnline extends Quickbooks {
       SyncToken: string;
     }
   ): Promise<Invoice> => {
-    return this.client.post('invoice' + id + '/send', {
+    return this.client.post('invoice/' + id + '/send', {
       json,
     });
   };
   sendPurchaseOrder = (id: string, sendTo?: string): Promise<PurchaseOrder> => {
-    return this.client.post('purchaseorder' + id + '/send', {
+    return this.client.post('purchaseorder/' + id + '/send', {
       searchParams: { sendTo },
     });
   };
@@ -220,7 +220,7 @@ export default class QuickbooksOnline extends Quickbooks {
     id: string,
     sendTo?: string
   ): Promise<SalesReceipt> => {
-    return this.client.post('salesreceipt' + id + '/send', {
+    return this.client.post('salesreceipt/' + id + '/send', {
       searchParams: { sendTo },
     });
   };
