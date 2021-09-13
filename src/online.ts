@@ -496,7 +496,7 @@ export default class QuickbooksOnline extends Quickbooks {
       searchParams: { include: '', query: statement },
     };
     if (includeLink) opts.searchParams.include = 'invoiceLink';
-    return this.client.get('query/invoice', opts);
+    return this.client.get('query', opts);
   };
   findItems = (statement: string): Promise<Item[]> => {
     return this.client.get('query', { searchParams: { query: statement } });
