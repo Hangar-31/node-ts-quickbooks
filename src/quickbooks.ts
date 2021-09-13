@@ -126,8 +126,8 @@ export default class Quickbooks {
                   Authorization: token,
                 },
               };
-              // Save for further requests
-              client.defaults.options.headers.Authorization = token;
+              // // Save for further requests
+              // client.defaults.options.headers.Authorization = token;
 
               // Make a new retry
               return retryWithMergedOptions(updatedOptions);

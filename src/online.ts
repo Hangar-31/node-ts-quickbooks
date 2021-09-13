@@ -167,9 +167,15 @@ export default class QuickbooksOnline extends Quickbooks {
   getInvoicePdf = (id: string): Promise<Invoice> => {
     return this.client.get('invoice/' + id);
   };
-  sendInvoicePdf = (id: string, sendTo?: string): Promise<Invoice> => {
+  sendInvoicePdf = (
+    id: string,
+    json: Partial<Invoice> & {
+      DeliveryAddress: { Address: string };
+      SyncToken: string;
+    }
+  ): Promise<Invoice> => {
     return this.client.post('invoice' + id + '/send', {
-      searchParams: { sendTo },
+      json,
     });
   };
   sendPurchaseOrder = (id: string, sendTo?: string): Promise<PurchaseOrder> => {
