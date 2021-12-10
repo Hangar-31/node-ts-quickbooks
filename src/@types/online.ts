@@ -536,8 +536,8 @@ export interface Invoice {
   CurrencyRef: BaseReference;
   ExchangeRate: ExchangeRate;
   PrivateNote: string;
-  LinkedTxn: LinkedTransaction;
-  Line: InvoiceLineItem;
+  LinkedTxn: LinkedTransaction[];
+  Line: InvoiceLineItem[];
   TxnTaxDetail: TransactionTaxDetail;
   CustomerRef: SimpleReference;
   CustomerMemo: string;
