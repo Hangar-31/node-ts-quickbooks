@@ -28,7 +28,7 @@ export interface Card {
     city?: string;
     streetAddress?: string;
     country?: string;
-    posticalCode?: string;
+    postalCode?: string;
     region?: string;
   };
   isBusiness: boolean;
@@ -99,7 +99,7 @@ export type PaymentContext = {
   deviceInfo?: DeviceInfo;
   recurring?: boolean;
   restaurant?: Restaurant;
-  lodging: Lodging;
+  lodging?: Lodging;
 };
 
 export enum RefundTypeEnum {

@@ -53,6 +53,9 @@ export interface BatchItemRequest {
   BatchItemRequest: BatchItemResponse[];
 }
 
+export interface SimpleReference {
+  value: string;
+}
 export interface BaseReference {
   name: string;
   content: string;
@@ -256,6 +259,7 @@ export interface CreditCardPayment {
   CCTxnMode: string;
   CCTxnType: string;
   PrevCCTransId: string;
+  CreditChargeResponse: { AuthCode: string; CCTransId: string; Status: string };
 }
 
 export interface CreditMemo {
@@ -535,7 +539,7 @@ export interface Invoice {
   LinkedTxn: LinkedTransaction;
   Line: InvoiceLineItem;
   TxnTaxDetail: TransactionTaxDetail;
-  CustomerRef: BaseReference;
+  CustomerRef: SimpleReference;
   CustomerMemo: string;
   BillAddr: PhysicalAddress;
   ShipAddr: PhysicalAddress;
@@ -559,9 +563,9 @@ export interface Invoice {
   AllowIPNPayment: string;
   DeliveryInfo: DeliveryInfo;
   BillEmail: EmailAddress;
-  AllowOnlinePayment: string;
-  AllowOnlineCreditCardPayment: string;
-  AllowOnlineACHPayment: string;
+  AllowOnlinePayment: boolean;
+  AllowOnlineCreditCardPayment: boolean;
+  AllowOnlineACHPayment: boolean;
   DepositToAccountRef: BaseReference;
   BillEmailCc: EmailAddress;
 }
@@ -703,7 +707,7 @@ export interface Line {
   Description: string;
   Amount: number;
   DetailType: string;
-  LinkedTxn: LinkedTransaction;
+  LinkedTxn: LinkedTransaction[];
   LineEx: LineEx;
   SalesItemLineDetail: SalesItemLineDetail;
   SubTotalLineDetail: SubTotalLineDetail;
@@ -748,8 +752,8 @@ export interface Payment {
   TxnDate: Date;
   PrivateNote: string;
   TxnStatus: string;
-  Line: Line;
-  CustomerRef: BaseReference;
+  Line: Line[];
+  CustomerRef: SimpleReference;
   ARAccountRef: BaseReference;
   DepositToAccountRef: BaseReference;
   PaymentMethodRef: BaseReference;
@@ -758,7 +762,7 @@ export interface Payment {
   TotalAmt: number;
   UnappliedAmt: number;
   ProcessPayment: string;
-  CurrencyRef: BaseReference;
+  CurrencyRef: SimpleReference;
   ExchangeRate: ExchangeRate;
 }
 

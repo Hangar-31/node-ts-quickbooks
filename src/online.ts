@@ -71,7 +71,7 @@ export default class QuickbooksOnline extends Quickbooks {
   createCreditMemo = (creditMemo: CreditMemo): Promise<CreditMemo> => {
     return this.client.post('creditmemo', { json: creditMemo });
   };
-  createCustomer = (customer: Customer): Promise<Customer> => {
+  createCustomer = (customer: Partial<Customer>): Promise<Customer> => {
     return this.client.post('customer', { json: customer });
   };
   createDepartment = (department: Department): Promise<Department> => {
@@ -209,16 +209,11 @@ export default class QuickbooksOnline extends Quickbooks {
     id: string,
     json: Partial<Invoice> & {
       DeliveryAddress: { Address: string };
-      SyncToken: string;
+      SyncToken: number;
     }
   ): Promise<Invoice> => {
     return this.client.post('invoice/' + id + '/send', {
       json,
-    });
-  };
-  sendPurchaseOrder = (id: string, sendTo?: string): Promise<PurchaseOrder> => {
-    return this.client.post('purchaseorder/' + id + '/send', {
-      searchParams: { sendTo },
     });
   };
   getItem = (id: string): Promise<Item> => {
@@ -529,7 +524,7 @@ export default class QuickbooksOnline extends Quickbooks {
   findInvoices = (
     statement: string,
     includeLink?: boolean
-  ): Promise<Invoice[]> => {
+  ): Promise<{ QueryResponse: { Invoice: Invoice[] } }> => {
     const opts = {
       searchParams: { include: '', query: statement },
     };
