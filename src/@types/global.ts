@@ -1,4 +1,8 @@
-type QuickbooksArgs = {
+import { HTTPAlias, Options } from 'got/dist/source';
+
+import { AuthResponse } from './payment';
+
+export type QuickbooksArgs = {
   clientId: string;
   clientSecret: string;
   realmId: string;
@@ -11,18 +15,18 @@ type QuickbooksArgs = {
   defaults?: Options;
 };
 
-interface GotRequestFunction {
+export interface GotRequestFunction {
   <ReturnType>(url: string, options?: Options): Promise<ReturnType>;
 }
 
-interface EntityRequestionFunction {
+export interface EntityRequestionFunction {
   <ReturnType>(
     url: string,
     idOrEntity?: string | any,
     options?: Options
   ): Promise<ReturnType>;
 }
-type Client = Record<
+export type Client = Record<
   HTTPAlias | 'deleteEntity',
   GotRequestFunction | EntityRequestionFunction
 >;

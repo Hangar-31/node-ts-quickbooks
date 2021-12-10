@@ -8,6 +8,9 @@ import got, {
 } from 'got';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Client, QuickbooksArgs } from './@types/global';
+import { AuthResponse } from './@types/payment';
+
 const getNewToken = async (
   clientId: string,
   clientSecret: string,
@@ -33,8 +36,8 @@ const getNewToken = async (
     onRefresh(resp);
 
     return 'Bearer ' + resp.access_token;
-  } catch (e) {
-    throw ErrorHandler(e);
+  } catch (e: any) {
+    throw ErrorHandler(e as RequestError);
   }
 };
 
@@ -179,8 +182,8 @@ export default class Quickbooks {
             if (keys.length === 1) return data[keys[0]] as ReturnType;
           }
           return data as ReturnType;
-        } catch (e) {
-          throw ErrorHandler(e);
+        } catch (e: any) {
+          throw ErrorHandler(e as RequestError);
         }
       };
     });
@@ -208,8 +211,8 @@ export default class Quickbooks {
         });
         // if the option is an entity, delete it
         return this.client.post(url, opts);
-      } catch (e) {
-        throw ErrorHandler(e);
+      } catch (e: any) {
+        throw ErrorHandler(e as RequestError);
       }
     };
   };

@@ -1,4 +1,4 @@
-interface Account {
+export interface Account {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -23,7 +23,7 @@ interface Account {
   TaxCodeRef: BaseReference;
 }
 
-interface AccountBasedExpenseLineDetail {
+export interface AccountBasedExpenseLineDetail {
   CustomerRef: BaseReference;
   ClassRef: BaseReference;
   AccountRef: BaseReference;
@@ -32,7 +32,7 @@ interface AccountBasedExpenseLineDetail {
   TaxCodeRef: BaseReference;
 }
 
-interface BatchItemRequest {
+export interface BatchItemRequest {
   operation: string;
   bId: string;
   Account: Account;
@@ -53,13 +53,13 @@ interface BatchItemRequest {
   BatchItemRequest: BatchItemResponse[];
 }
 
-interface BaseReference {
+export interface BaseReference {
   name: string;
   content: string;
   type: string;
 }
 
-interface BatchItemResponse {
+export interface BatchItemResponse {
   bId: string;
   Fault: Fault;
   Account: Account;
@@ -80,7 +80,7 @@ interface BatchItemResponse {
   BatchItemResponse: BatchItemResponse[];
 }
 
-interface Bill {
+export interface Bill {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -106,18 +106,18 @@ interface Bill {
   TotalAmt: number;
   CurrencyRef: BaseReference;
 }
-interface ExchangeRate {
+export interface ExchangeRate {
   Id: string;
-  SyncToken: Integer;
+  SyncToken: number;
   MetaData: MetaData;
   CustomField: CustomField;
   SourceCurrencyCode: string;
   TargetCurrencyCode: string;
-  Rate: BigDecimal;
+  Rate: number;
   AsOfDate: Date;
 }
 
-interface BillPayment {
+export interface BillPayment {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -137,7 +137,7 @@ interface BillPayment {
   TotalAmt: number;
 }
 
-interface BillLineItem {
+export interface BillLineItem {
   Id: string;
   LineNum: number;
   Description: string;
@@ -147,25 +147,25 @@ interface BillLineItem {
   ItemBasedExpenseLineDetail: ItemBasedExpenseLineDetail;
 }
 
-interface Attachable {
+export interface Attachable {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
 }
 
-interface BillPaymentCreditCard {
+export interface BillPaymentCreditCard {
   CCAccountRef: BaseReference;
   CCDetail: CreditCardPayment;
 }
 
-interface BillPaymentCheck {
+export interface BillPaymentCheck {
   BankAccountRef: BaseReference;
   PrintStatus: string;
   CheckDetail: CheckPayment;
   PayeeAddr: PhysicalAddress;
 }
 
-interface BillPaymentLineItem {
+export interface BillPaymentLineItem {
   Id: string;
   LineNum: number;
   Description: string;
@@ -174,7 +174,7 @@ interface BillPaymentLineItem {
   LinkedTxn: LinkedTransaction;
 }
 
-interface Budget {
+export interface Budget {
   Id: string;
   Name: string;
   BudgetType: string;
@@ -187,7 +187,7 @@ interface Budget {
   BudgetDetail: BudgetLineItem;
 }
 
-interface BudgetLineItem {
+export interface BudgetLineItem {
   BudgetDate: Date;
   Amount: string;
   AccountRef: BaseReference;
@@ -196,7 +196,7 @@ interface BudgetLineItem {
   DepartmentRef: BaseReference;
 }
 
-interface CheckPayment {
+export interface CheckPayment {
   CheckNum: string;
   Status: string;
   NameOnAcct: string;
@@ -204,7 +204,7 @@ interface CheckPayment {
   BankName: string;
 }
 
-interface Class {
+export interface Class {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -215,7 +215,7 @@ interface Class {
   Active: string;
 }
 
-interface CompanyCurrency {
+export interface CompanyCurrency {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -224,7 +224,7 @@ interface CompanyCurrency {
   Active: string;
 }
 
-interface CompanyInfo {
+export interface CompanyInfo {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -244,7 +244,7 @@ interface CompanyInfo {
   NameValue: NameValue;
 }
 
-interface CreditCardPayment {
+export interface CreditCardPayment {
   Number: string;
   Type: string;
   NameOnAcct: string;
@@ -258,7 +258,7 @@ interface CreditCardPayment {
   PrevCCTransId: string;
 }
 
-interface CreditMemo {
+export interface CreditMemo {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -290,7 +290,7 @@ interface CreditMemo {
   TotalAmt: number;
 }
 
-interface Customer {
+export interface Customer {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -333,7 +333,7 @@ interface Customer {
   IsProject: string;
 }
 
-interface CustomField {
+export interface CustomField {
   DefinitionId: number;
   Name: string;
   Type: string;
@@ -343,7 +343,7 @@ interface CustomField {
   NumberValue: number;
 }
 
-interface CustomerType {
+export interface CustomerType {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -351,12 +351,12 @@ interface CustomerType {
   Active: string;
 }
 
-interface DeliveryInfo {
+export interface DeliveryInfo {
   DeliveryType: string;
   DeliveryDate: Date;
 }
 
-interface Department {
+export interface Department {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -367,7 +367,7 @@ interface Department {
   Active: string;
 }
 
-interface Deposit {
+export interface Deposit {
   Id: number;
   SyncToken: number;
   MetaData: MetaData;
@@ -386,7 +386,7 @@ interface Deposit {
   TotalAmt: number;
 }
 
-interface DepositLineDetail {
+export interface DepositLineDetail {
   Entity: BaseReference;
   ClassRef: BaseReference;
   AccountRef: BaseReference;
@@ -396,7 +396,7 @@ interface DepositLineDetail {
   CustomField: CustomField;
 }
 
-interface DepositLineItem {
+export interface DepositLineItem {
   Id: string;
   LineNum: number;
   Description: string;
@@ -407,7 +407,7 @@ interface DepositLineItem {
   CustomField: CustomField;
 }
 
-interface DiscountLineDetail {
+export interface DiscountLineDetail {
   DiscountRef: BaseReference;
   PercentBased: string;
   DiscountPercent: number;
@@ -416,20 +416,20 @@ interface DiscountLineDetail {
   TaxCodeRef: BaseReference;
 }
 
-interface DiscountOverride {
+export interface DiscountOverride {
   DiscountRef: BaseReference;
   PercentBased: string;
   DiscountPercent: number;
   DiscountAccountRef: BaseReference;
 }
 
-interface EffectiveTaxRate {
+export interface EffectiveTaxRate {
   RateValue: string;
   EffectiveDate: Date;
   EndDate: Date;
 }
 
-interface Employee {
+export interface Employee {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -456,15 +456,15 @@ interface Employee {
   ReleasedDate: Date;
 }
 
-interface EmailAddress {
+export interface EmailAddress {
   Address: string;
 }
 
-interface Entity {
+export interface Entity {
   Type: string;
 }
 
-interface Estimate {
+export interface Estimate {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -499,27 +499,28 @@ interface Estimate {
   AcceptedDate: Date;
 }
 
-interface Fault {
+export interface Fault {
   code: string;
   element: string;
   Message: string;
   Detail: string;
 }
 
-interface InvoiceGroupLineDetail {
-  Id: string;
-  GroupItemRef: BaseReference;
-  Quantity: number;
-  Line: InvoiceLineItem;
-}
-interface DescriptionLineDetail {
+export interface InvoiceGroupLineDetail {
   Id: string;
   GroupItemRef: BaseReference;
   Quantity: number;
   Line: InvoiceLineItem;
 }
 
-interface Invoice {
+export interface DescriptionLineDetail {
+  Id: string;
+  GroupItemRef: BaseReference;
+  Quantity: number;
+  Line: InvoiceLineItem;
+}
+
+export interface Invoice {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -565,7 +566,7 @@ interface Invoice {
   BillEmailCc: EmailAddress;
 }
 
-interface InvoiceLineItem {
+export interface InvoiceLineItem {
   Id: string;
   LineNum: number;
   Description: string;
@@ -579,14 +580,14 @@ interface InvoiceLineItem {
   DESCRIPTION_LINE_DETAIL: DescriptionLineDetail;
 }
 
-interface GroupLineDetail {
+export interface GroupLineDetail {
   Id: string;
   GroupItemRef: BaseReference;
   Quantity: number;
   Line: Line;
 }
 
-interface ItemBasedExpenseLineDetail {
+export interface ItemBasedExpenseLineDetail {
   ItemRef: BaseReference;
   ClassRef: BaseReference;
   UnitPrice: number;
@@ -599,16 +600,16 @@ interface ItemBasedExpenseLineDetail {
   BillableStatus: string;
 }
 
-interface ItemGroupDetail {
+export interface ItemGroupDetail {
   ItemGroupLine: ItemGroupLine;
 }
 
-interface ItemGroupLine {
+export interface ItemGroupLine {
   ItemRef: BaseReference;
   Qty: string;
 }
 
-interface Item {
+export interface Item {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -644,7 +645,7 @@ interface Item {
   ItemGroupDetail: ItemGroupDetail;
 }
 
-interface JournalEntryLineDetail {
+export interface JournalEntryLineDetail {
   PostingType: string;
   Entity: Entity;
   AccountRef: BaseReference;
@@ -656,7 +657,7 @@ interface JournalEntryLineDetail {
   BillableStatus: string;
 }
 
-interface JournalEntry {
+export interface JournalEntry {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -672,7 +673,7 @@ interface JournalEntry {
   Adjustment: string;
 }
 
-enum JournalCodeType {
+export enum JournalCodeType {
   Expenses,
   Sales,
   Bank,
@@ -681,7 +682,8 @@ enum JournalCodeType {
   Cash,
   Others,
 }
-interface JournalCode {
+
+export interface JournalCode {
   Id: string;
   Name: string;
   SyncToken: number;
@@ -691,11 +693,11 @@ interface JournalCode {
   MetaData: MetaData;
 }
 
-interface LineEx {
+export interface LineEx {
   NameValue: NameValue;
 }
 
-interface Line {
+export interface Line {
   Id: string;
   LineNum: number;
   Description: string;
@@ -711,35 +713,35 @@ interface Line {
   GroupLineDetail: GroupLineDetail;
 }
 
-interface MarkupInfo {
+export interface MarkupInfo {
   PercentBased: string;
   Value: number;
   Percent: number;
   PriceLevelRef: BaseReference;
 }
 
-interface LinkedTransaction {
+export interface LinkedTransaction {
   TxnId: string;
   TxnType: string;
   TxnLineId: string;
 }
 
-interface MetaData {
+export interface MetaData {
   CreateDate: Date;
   LastUpdatedDate: Date;
 }
 
-interface OtherContactInfo {
+export interface OtherContactInfo {
   Type: string;
   Telephone: TelephoneNumber;
 }
 
-interface NameValue {
+export interface NameValue {
   Name: string;
   Value: string;
 }
 
-interface Payment {
+export interface Payment {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -760,7 +762,7 @@ interface Payment {
   ExchangeRate: ExchangeRate;
 }
 
-interface PaymentMethod {
+export interface PaymentMethod {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -770,14 +772,14 @@ interface PaymentMethod {
   Amount: number;
 }
 
-interface PaymentLineDetail {
+export interface PaymentLineDetail {
   ItemRef: BaseReference;
   ClassRef: BaseReference;
   Balance: number;
   Discount: DiscountOverride;
 }
 
-interface PhysicalAddress {
+export interface PhysicalAddress {
   Id: string;
   Line1: string;
   Line2: string;
@@ -793,7 +795,7 @@ interface PhysicalAddress {
   Long: string;
 }
 
-interface Purchase {
+export interface Purchase {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -815,7 +817,7 @@ interface Purchase {
   Credit: string;
 }
 
-interface PurchaseLineItem {
+export interface PurchaseLineItem {
   Id: string;
   LineNum: number;
   Description: string;
@@ -827,7 +829,7 @@ interface PurchaseLineItem {
   GROUP_LINE_DETAIL: GroupLineDetail;
 }
 
-interface PurchaseOrder {
+export interface PurchaseOrder {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -856,7 +858,7 @@ interface PurchaseOrder {
   TaxCodeRef: BaseReference;
 }
 
-interface RefundReceipt {
+export interface RefundReceipt {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -891,11 +893,11 @@ interface RefundReceipt {
   HomeTotalAmt: number;
 }
 
-interface PurchaseTaxRateList {
+export interface PurchaseTaxRateList {
   TaxRateDetail: TaxRateDetail;
 }
 
-interface SalesItemLineDetail {
+export interface SalesItemLineDetail {
   ItemRef: BaseReference;
   ClassRef: BaseReference;
   UnitPrice: number;
@@ -906,7 +908,7 @@ interface SalesItemLineDetail {
   ServiceDate: Date;
 }
 
-interface SalesReceipt {
+export interface SalesReceipt {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -943,11 +945,11 @@ interface SalesReceipt {
   HomeTotalAmt: number;
 }
 
-interface SalesTaxRateList {
+export interface SalesTaxRateList {
   TaxRateDetail: TaxRateDetail;
 }
 
-interface SubTotalLineDetail {
+export interface SubTotalLineDetail {
   ItemRef: BaseReference;
   ClassRef: BaseReference;
   UnitPrice: number;
@@ -955,7 +957,7 @@ interface SubTotalLineDetail {
   TaxCodeRef: BaseReference;
 }
 
-interface TaxAgency {
+export interface TaxAgency {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -964,7 +966,7 @@ interface TaxAgency {
   DisplayName: string;
 }
 
-interface TaxCode {
+export interface TaxCode {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -977,7 +979,7 @@ interface TaxCode {
   PurchaseTaxRateList: PurchaseTaxRateList;
 }
 
-interface TaxLine {
+export interface TaxLine {
   Id: string;
   LineNum: number;
   Description: string;
@@ -986,7 +988,7 @@ interface TaxLine {
   TaxLineDetail: TaxLineDetail;
 }
 
-interface TaxRate {
+export interface TaxRate {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1001,7 +1003,7 @@ interface TaxRate {
   EffectiveTaxRate: EffectiveTaxRate;
 }
 
-interface TaxLineDetail {
+export interface TaxLineDetail {
   PercentBased: string;
   NetAmountTaxable: number;
   TaxInclusiveAmount: number;
@@ -1010,19 +1012,19 @@ interface TaxLineDetail {
   TaxRateRef: BaseReference;
 }
 
-interface TaxRateDetail {
+export interface TaxRateDetail {
   TaxRateRef: BaseReference;
   TaxTypeApplicable: string;
   TaxOrder: string;
 }
 
-interface TaxService {
+export interface TaxService {
   TaxCodeId: string;
   TaxCode: string;
   TaxRateDetails: TaxRateDetailLine;
 }
 
-interface TaxRateDetailLine {
+export interface TaxRateDetailLine {
   TaxRateId: string;
   TaxRateName: string;
   RateValue: string;
@@ -1030,11 +1032,11 @@ interface TaxRateDetailLine {
   TaxApplicableOn: string;
 }
 
-interface TelephoneNumber {
+export interface TelephoneNumber {
   FreeFormNumber: string;
 }
 
-interface Term {
+export interface Term {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1049,9 +1051,10 @@ interface Term {
   DiscountDayOfMonth: number;
   AttachableRef: BaseReference;
 }
-interface TimeActivity {
+
+export interface TimeActivity {
   Id: string;
-  SyncToken: Integer;
+  SyncToken: number;
   MetaData: MetaData;
   TxnDate: string;
   NameOf: string;
@@ -1063,18 +1066,19 @@ interface TimeActivity {
   BillableStatus: string;
   Taxable: string;
   HourlyRate: string;
-  Minutes: Integer;
-  Hours: Integer;
-  BreakMinutes: Integer;
-  BreakHours: Integer;
+  Minutes: number;
+  Hours: number;
+  BreakMinutes: number;
+  BreakHours: number;
   Description: string;
   AttachableRef: BaseReference;
   DepartmentRef: BaseReference;
-  StartTime: DateTime;
-  EndTime: DateTime;
+  StartTime: Date;
+  EndTime: Date;
   TimeZone: string;
 }
-interface DateActivity {
+
+export interface DateActivity {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1100,13 +1104,13 @@ interface DateActivity {
   DateZone: string;
 }
 
-interface TransactionTaxDetail {
+export interface TransactionTaxDetail {
   TxnTaxCodeRef: BaseReference;
   TotalTax: number;
   TaxLine: TaxLine;
 }
 
-interface Transfer {
+export interface Transfer {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1118,7 +1122,7 @@ interface Transfer {
   Amount: number;
 }
 
-interface Vendor {
+export interface Vendor {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1149,11 +1153,11 @@ interface Vendor {
   BillRate: number;
 }
 
-interface WebSiteAddress {
+export interface WebSiteAddress {
   URI: string;
 }
 
-interface VendorCredit {
+export interface VendorCredit {
   Id: string;
   SyncToken: number;
   MetaData: MetaData;
@@ -1169,7 +1173,7 @@ interface VendorCredit {
   ExchangeRate: ExchangeRate;
 }
 
-interface Report {
+export interface Report {
   Header: Record<string, any>;
   Rows: {
     Row: Record<string, any>[];

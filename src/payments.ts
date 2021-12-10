@@ -1,3 +1,5 @@
+import { QuickbooksArgs } from './@types/global';
+import { Capture, Card, Charge, Refund, VoidObject } from './@types/payment';
 import Quickbooks from './quickbooks';
 
 class QuickbooksPayments extends Quickbooks {

@@ -1,3 +1,4 @@
+import { EntityRequestionFunction, GotRequestFunction } from '../@types/global';
 import QuickbooksOnline from '../online';
 import api from './api.json';
 
@@ -31,7 +32,9 @@ const online = new QuickbooksOnline({
   debug: false,
   // enable debugging?
   minorVersion: '59',
-  onRefresh: () => {},
+  onRefresh: () => {
+    return;
+  },
   realmId,
   refreshToken,
   useSandbox: process.env.NODE_ENV !== 'production',
@@ -79,7 +82,7 @@ const run = async () => {
                 await method(data);
                 console.log('SUCCESS:', methodName);
               }
-            } catch (e) {
+            } catch (e: any) {
               console.log('FAILED', methodName, data, e.response.body);
             }
           },

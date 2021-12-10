@@ -1,4 +1,4 @@
-interface AuthResponse {
+export interface AuthResponse {
   token_type: string;
   expires_in: number;
   refresh_token: string;
@@ -13,8 +13,7 @@ enum CardType {
   DINERS,
   JCB,
 }
-
-interface Card {
+export interface Card {
   readonly id: string;
   number: string;
   expMonth: string;
@@ -44,7 +43,7 @@ interface Card {
   };
 }
 
-enum ChargeTypeEnum {
+export enum ChargeTypeEnum {
   ConventionFees,
   GiftShop,
   Golf,
@@ -55,7 +54,7 @@ enum ChargeTypeEnum {
   Tennis,
 }
 
-enum SpecialProgramEnum {
+export enum SpecialProgramEnum {
   AdvanceDeposit,
   AssuredReservation,
   DelayedCharge,
@@ -64,7 +63,7 @@ enum SpecialProgramEnum {
   NoShowCharge,
 }
 
-type Lodging = {
+export type Lodging = {
   lengthOfStay?: number;
   checkInDate?: Date;
   roomRate?: number;
@@ -76,14 +75,14 @@ type Lodging = {
   totalAuthAmount?: number;
 };
 
-type Restaurant = {
+export type Restaurant = {
   beverageAmount?: number;
   serverID?: string;
   taxAmount?: number;
   foodAmount?: number;
   tipAmount?: number;
 };
-type DeviceInfo = {
+export type DeviceInfo = {
   id: string;
   macAddress?: string;
   encrypted?: boolean;
@@ -93,7 +92,7 @@ type DeviceInfo = {
   latitude?: string;
   type?: string;
 };
-type PaymentContext = {
+export type PaymentContext = {
   mobile: boolean;
   isEcommerce: boolean;
   tax?: number;
@@ -102,12 +101,13 @@ type PaymentContext = {
   restaurant?: Restaurant;
   lodging: Lodging;
 };
-enum RefundTypeEnum {
+
+export enum RefundTypeEnum {
   REFUND,
   VOID,
 }
 
-enum RefundChargeStatusEnum {
+export enum RefundChargeStatusEnum {
   ISSUED,
   DECLINED,
   SETTLED,
@@ -115,7 +115,7 @@ enum RefundChargeStatusEnum {
   SUCCEEDED,
 }
 
-enum ChargeStatusEnum {
+export enum ChargeStatusEnum {
   AUTHORIZED,
   DECLINED,
   CAPTURED,
@@ -128,7 +128,7 @@ enum ValidationEnum {
   Fail,
   NotAvailable,
 }
-interface Refund {
+export interface Refund {
   id: string;
   description?: string;
   amount?: number;
@@ -137,8 +137,7 @@ interface Refund {
   readonly created: string;
   type: RefundTypeEnum;
 }
-
-interface Charge {
+export interface Charge {
   id: string;
   currency: string;
   amount: number;
@@ -161,19 +160,17 @@ interface Charge {
   readonly cardSecurityCodeMatch: ValidationEnum;
   readonly avsStreet: ValidationEnum;
 }
-
-interface Capture {
+export interface Capture {
   amount: number;
   description?: string;
   context: PaymentContext;
 }
 
-enum RefundStatusEnum {
+export enum RefundStatusEnum {
   ISSUED,
   DECLINED,
 }
-
-interface VoidObject {
+export interface VoidObject {
   readonly id: string;
   readonly status: RefundStatusEnum;
   readonly created: Date;
