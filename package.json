@@ -1,6 +1,6 @@
 {
   "name": "node-ts-quickbooks",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Node SDK for Quickbooks with types",
   "scripts": {
     "tsc:w": "tsc -w",
