@@ -1,4 +1,4 @@
-import { QuickbooksArgs } from './@types/global';
+import { DeepPartial, QuickbooksArgs } from './@types/global';
 import {
   Account,
   Bill,
@@ -53,94 +53,112 @@ export default class QuickbooksOnline extends Quickbooks {
     this.createClient(opts);
   }
 
-  createAccount = (account: Account): Promise<Account> => {
+  createAccount = (account: DeepPartial<Account>): Promise<Account> => {
     return this.client.post('account', { json: account });
   };
   // createAttachable(attachable: Attachable): Promise<Attachable> => {
   //   return this.client.post('attachable', { json: attachable });
   // }
-  createBill = (bill: Bill): Promise<Bill> => {
+  createBill = (bill: DeepPartial<Bill>): Promise<Bill> => {
     return this.client.post('bill', { json: bill });
   };
-  createBillPayment = (billPayment: BillPayment): Promise<BillPayment> => {
+  createBillPayment = (
+    billPayment: DeepPartial<BillPayment>
+  ): Promise<BillPayment> => {
     return this.client.post('billpayment', { json: billPayment });
   };
-  createClass = (klass: Class): Promise<Class> => {
+  createClass = (klass: DeepPartial<Class>): Promise<Class> => {
     return this.client.post('class', { json: klass });
   };
-  createCreditMemo = (creditMemo: CreditMemo): Promise<CreditMemo> => {
+  createCreditMemo = (
+    creditMemo: DeepPartial<CreditMemo>
+  ): Promise<CreditMemo> => {
     return this.client.post('creditmemo', { json: creditMemo });
   };
-  createCustomer = (customer: Partial<Customer>): Promise<Customer> => {
+  createCustomer = (customer: DeepPartial<Customer>): Promise<Customer> => {
     return this.client.post('customer', { json: customer });
   };
-  createDepartment = (department: Department): Promise<Department> => {
+  createDepartment = (
+    department: DeepPartial<Department>
+  ): Promise<Department> => {
     return this.client.post('department', { json: department });
   };
-  createDeposit = (deposit: Deposit): Promise<Deposit> => {
+  createDeposit = (deposit: DeepPartial<Deposit>): Promise<Deposit> => {
     return this.client.post('deposit', { json: deposit });
   };
-  createEmployee = (employee: Employee): Promise<Employee> => {
+  createEmployee = (employee: DeepPartial<Employee>): Promise<Employee> => {
     return this.client.post('employee', { json: employee });
   };
-  createEstimate = (estimate: Estimate): Promise<Estimate> => {
+  createEstimate = (estimate: DeepPartial<Estimate>): Promise<Estimate> => {
     return this.client.post('estimate', { json: estimate });
   };
-  createInvoice = (invoice: Invoice): Promise<Invoice> => {
+  createInvoice = (invoice: DeepPartial<Invoice>): Promise<Invoice> => {
     return this.client.post('invoice', { json: invoice });
   };
-  createItem = (item: Item): Promise<Item> => {
+  createItem = (item: DeepPartial<Item>): Promise<Item> => {
     return this.client.post('item', { json: item });
   };
-  createJournalCode = (journalCode: JournalCode): Promise<JournalCode> => {
+  createJournalCode = (
+    journalCode: DeepPartial<JournalCode>
+  ): Promise<JournalCode> => {
     return this.client.post('journalcode', { json: journalCode });
   };
-  createJournalEntry = (journalEntry: JournalEntry): Promise<JournalEntry> => {
+  createJournalEntry = (
+    journalEntry: DeepPartial<JournalEntry>
+  ): Promise<JournalEntry> => {
     return this.client.post('journalentry', { json: journalEntry });
   };
-  createPayment = (payment: Payment): Promise<Payment> => {
+  createPayment = (payment: DeepPartial<Payment>): Promise<Payment> => {
     return this.client.post('payment', { json: payment });
   };
   createPaymentMethod = (
-    paymentMethod: PaymentMethod
+    paymentMethod: DeepPartial<PaymentMethod>
   ): Promise<PaymentMethod> => {
     return this.client.post('paymentmethod', { json: paymentMethod });
   };
-  createPurchase = (purchase: Purchase): Promise<Purchase> => {
+  createPurchase = (purchase: DeepPartial<Purchase>): Promise<Purchase> => {
     return this.client.post('purchase', { json: purchase });
   };
   createPurchaseOrder = (
-    purchaseOrder: PurchaseOrder
+    purchaseOrder: DeepPartial<PurchaseOrder>
   ): Promise<PurchaseOrder> => {
     return this.client.post('purchaseorder', { json: purchaseOrder });
   };
   createRefundReceipt = (
-    refundReceipt: RefundReceipt
+    refundReceipt: DeepPartial<RefundReceipt>
   ): Promise<RefundReceipt> => {
     return this.client.post('refundreceipt', { json: refundReceipt });
   };
-  createSalesReceipt = (salesReceipt: SalesReceipt): Promise<SalesReceipt> => {
+  createSalesReceipt = (
+    salesReceipt: DeepPartial<SalesReceipt>
+  ): Promise<SalesReceipt> => {
     return this.client.post('salesreceipt', { json: salesReceipt });
   };
-  createTaxAgency = (taxAgency: TaxAgency): Promise<TaxAgency> => {
+  createTaxAgency = (taxAgency: DeepPartial<TaxAgency>): Promise<TaxAgency> => {
     return this.client.post('taxagency', { json: taxAgency });
   };
-  createTaxService = (taxService: TaxService): Promise<TaxService> => {
+  createTaxService = (
+    taxService: DeepPartial<TaxService>
+  ): Promise<TaxService> => {
     return this.client.post('taxservice', { json: taxService });
   };
-  createTerm = (term: Term): Promise<Term> => {
+  createTerm = (term: DeepPartial<Term>): Promise<Term> => {
     return this.client.post('term', { json: term });
   };
-  createTimeActivity = (timeActivity: TimeActivity): Promise<TimeActivity> => {
+  createTimeActivity = (
+    timeActivity: DeepPartial<TimeActivity>
+  ): Promise<TimeActivity> => {
     return this.client.post('timeactivity', { json: timeActivity });
   };
-  createTransfer = (transfer: Transfer): Promise<Transfer> => {
+  createTransfer = (transfer: DeepPartial<Transfer>): Promise<Transfer> => {
     return this.client.post('transfer', { json: transfer });
   };
-  createVendor = (vendor: Vendor): Promise<Vendor> => {
+  createVendor = (vendor: DeepPartial<Vendor>): Promise<Vendor> => {
     return this.client.post('vendor', { json: vendor });
   };
-  createVendorCredit = (vendorCredit: VendorCredit): Promise<VendorCredit> => {
+  createVendorCredit = (
+    vendorCredit: DeepPartial<VendorCredit>
+  ): Promise<VendorCredit> => {
     return this.client.post('vendorcredit', { json: vendorCredit });
   };
   getAccount = (id: string): Promise<Account> => {
@@ -207,7 +225,7 @@ export default class QuickbooksOnline extends Quickbooks {
   };
   sendInvoicePdf = (
     id: string,
-    json: Partial<Invoice> & {
+    json: DeepPartial<Invoice> & {
       DeliveryAddress: { Address: string };
       SyncToken: number;
     }

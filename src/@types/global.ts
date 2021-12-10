@@ -1,7 +1,9 @@
 import { HTTPAlias, Options } from 'got/dist/source';
 
 import { AuthResponse } from './payment';
-
+export type DeepPartial<T> = {
+  [P in keyof T]?: DeepPartial<T[P]>;
+};
 export type QuickbooksArgs = {
   clientId: string;
   clientSecret: string;

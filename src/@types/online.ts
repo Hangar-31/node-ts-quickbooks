@@ -571,17 +571,17 @@ export interface Invoice {
 }
 
 export interface InvoiceLineItem {
-  Id: string;
+  Id?: string;
   LineNum: number;
   Description: string;
   Amount: number;
   DetailType: string;
-  SALES_LINE_ITEM_DETAIL: SalesItemLineDetail;
-  SUB_TOTAL_LINE_DETAIL: SubTotalLineDetail;
-  PAYMENT_LINE_DETAIL: PaymentLineDetail;
-  DISCOUNT_LINE_DETAIL: DiscountLineDetail;
-  INVOICE_GROUP_LINE_DETAIL: InvoiceGroupLineDetail;
-  DESCRIPTION_LINE_DETAIL: DescriptionLineDetail;
+  SalesItemLineDetail?: SalesItemLineDetail;
+  SubTotalLineDetail?: SubTotalLineDetail;
+  PaymentLineDetail?: PaymentLineDetail;
+  DiscountLineDetail?: DiscountLineDetail;
+  InvoiceGroupLineDetail?: InvoiceGroupLineDetail;
+  DescriptionLineDetail?: DescriptionLineDetail;
 }
 
 export interface GroupLineDetail {
