@@ -299,106 +299,124 @@ export default class QuickbooksOnline extends Quickbooks {
   getVendorCredit = (id: string): Promise<VendorCredit> => {
     return this.client.get('vendorcredit/' + id);
   };
-  updateAccount = (account: Account): Promise<Account> => {
+  updateAccount = (account: DeepPartial<Account>): Promise<Account> => {
     return this.client.post('account', { json: account });
   };
   // updateAttachable(attachable: Attachable): Promise<Attachable> => {
   //   return this.client.post('attachable', { json: attachable });
   // }
-  updateBill = (bill: Bill): Promise<Bill> => {
+  updateBill = (bill: DeepPartial<Bill>): Promise<Bill> => {
     return this.client.post('bill', { json: bill });
   };
-  updateBillPayment = (billPayment: BillPayment): Promise<BillPayment> => {
+  updateBillPayment = (
+    billPayment: DeepPartial<BillPayment>
+  ): Promise<BillPayment> => {
     return this.client.post('billpayment', { json: billPayment });
   };
-  updateClass = (klass: Class): Promise<Class> => {
+  updateClass = (klass: DeepPartial<Class>): Promise<Class> => {
     return this.client.post('class', { json: klass });
   };
-  updateCompanyInfo = (companyInfo: CompanyInfo): Promise<CompanyInfo> => {
+  updateCompanyInfo = (
+    companyInfo: DeepPartial<CompanyInfo>
+  ): Promise<CompanyInfo> => {
     return this.client.post('companyinfo', { json: companyInfo });
   };
-  updateCreditMemo = (creditMemo: CreditMemo): Promise<CreditMemo> => {
+  updateCreditMemo = (
+    creditMemo: DeepPartial<CreditMemo>
+  ): Promise<CreditMemo> => {
     return this.client.post('creditmemo', { json: creditMemo });
   };
-  updateCustomer = (customer: Customer): Promise<Customer> => {
+  updateCustomer = (customer: DeepPartial<Customer>): Promise<Customer> => {
     return this.client.post('customer', { json: customer });
   };
-  updateDepartment = (department: Department): Promise<Department> => {
+  updateDepartment = (
+    department: DeepPartial<Department>
+  ): Promise<Department> => {
     return this.client.post('department', { json: department });
   };
-  updateDeposit = (deposit: Deposit): Promise<Deposit> => {
+  updateDeposit = (deposit: DeepPartial<Deposit>): Promise<Deposit> => {
     return this.client.post('deposit', { json: deposit });
   };
-  updateEmployee = (employee: Employee): Promise<Employee> => {
+  updateEmployee = (employee: DeepPartial<Employee>): Promise<Employee> => {
     return this.client.post('employee', { json: employee });
   };
-  updateEstimate = (estimate: Estimate): Promise<Estimate> => {
+  updateEstimate = (estimate: DeepPartial<Estimate>): Promise<Estimate> => {
     return this.client.post('estimate', { json: estimate });
   };
-  updateInvoice = (invoice: Invoice): Promise<Invoice> => {
+  updateInvoice = (invoice: DeepPartial<Invoice>): Promise<Invoice> => {
     return this.client.post('invoice', { json: invoice });
   };
-  updateItem = (item: Item): Promise<Item> => {
+  updateItem = (item: DeepPartial<Item>): Promise<Item> => {
     return this.client.post('item', { json: item });
   };
-  updateJournalCode = (journalCode: JournalCode): Promise<JournalCode> => {
+  updateJournalCode = (
+    journalCode: DeepPartial<JournalCode>
+  ): Promise<JournalCode> => {
     return this.client.post('journalcode', { json: journalCode });
   };
-  updateJournalEntry = (journalEntry: JournalEntry): Promise<JournalEntry> => {
+  updateJournalEntry = (
+    journalEntry: DeepPartial<JournalEntry>
+  ): Promise<JournalEntry> => {
     return this.client.post('journalentry', { json: journalEntry });
   };
-  updatePayment = (payment: Payment): Promise<Payment> => {
+  updatePayment = (payment: DeepPartial<Payment>): Promise<Payment> => {
     return this.client.post('payment', { json: payment });
   };
   updatePaymentMethod = (
-    paymentMethod: PaymentMethod
+    paymentMethod: DeepPartial<PaymentMethod>
   ): Promise<PaymentMethod> => {
     return this.client.post('paymentmethod', { json: paymentMethod });
   };
   // updatePreferences(preferences: Preferences): Promise<Preferences> => {
   //   return this.client.post('preferences', { json: preferences });
   // }
-  updatePurchase = (purchase: Purchase): Promise<Purchase> => {
+  updatePurchase = (purchase: DeepPartial<Purchase>): Promise<Purchase> => {
     return this.client.post('purchase', { json: purchase });
   };
   updatePurchaseOrder = (
-    purchaseOrder: PurchaseOrder
+    purchaseOrder: DeepPartial<PurchaseOrder>
   ): Promise<PurchaseOrder> => {
     return this.client.post('purchaseorder', { json: purchaseOrder });
   };
   updateRefundReceipt = (
-    refundReceipt: RefundReceipt
+    refundReceipt: DeepPartial<RefundReceipt>
   ): Promise<RefundReceipt> => {
     return this.client.post('refundreceipt', { json: refundReceipt });
   };
-  updateSalesReceipt = (salesReceipt: SalesReceipt): Promise<SalesReceipt> => {
+  updateSalesReceipt = (
+    salesReceipt: DeepPartial<SalesReceipt>
+  ): Promise<SalesReceipt> => {
     return this.client.post('salesreceipt', { json: salesReceipt });
   };
-  updateTaxAgency = (taxAgency: TaxAgency): Promise<TaxAgency> => {
+  updateTaxAgency = (taxAgency: DeepPartial<TaxAgency>): Promise<TaxAgency> => {
     return this.client.post('taxagency', { json: taxAgency });
   };
-  updateTaxCode = (taxCode: TaxCode): Promise<TaxCode> => {
+  updateTaxCode = (taxCode: DeepPartial<TaxCode>): Promise<TaxCode> => {
     return this.client.post('taxcode', { json: taxCode });
   };
-  updateTaxRate = (taxRate: TaxRate): Promise<TaxRate> => {
+  updateTaxRate = (taxRate: DeepPartial<TaxRate>): Promise<TaxRate> => {
     return this.client.post('taxrate', { json: taxRate });
   };
-  updateTerm = (term: Term): Promise<Term> => {
+  updateTerm = (term: DeepPartial<Term>): Promise<Term> => {
     return this.client.post('term', { json: term });
   };
-  updateTimeActivity = (timeActivity: TimeActivity): Promise<TimeActivity> => {
+  updateTimeActivity = (
+    timeActivity: DeepPartial<TimeActivity>
+  ): Promise<TimeActivity> => {
     return this.client.post('timeactivity', { json: timeActivity });
   };
-  updateTransfer = (transfer: Transfer): Promise<Transfer> => {
+  updateTransfer = (transfer: DeepPartial<Transfer>): Promise<Transfer> => {
     return this.client.post('transfer', { json: transfer });
   };
-  updateVendor = (vendor: Vendor): Promise<Vendor> => {
+  updateVendor = (vendor: DeepPartial<Vendor>): Promise<Vendor> => {
     return this.client.post('vendor', { json: vendor });
   };
-  updateVendorCredit = (vendorCredit: VendorCredit): Promise<VendorCredit> => {
+  updateVendorCredit = (
+    vendorCredit: DeepPartial<VendorCredit>
+  ): Promise<VendorCredit> => {
     return this.client.post('vendorcredit', { json: vendorCredit });
   };
-  updateExchangeRate = (exchangeRate: number): Promise<number> => {
+  updateExchangeRate = (exchangeRate: DeepPartial<number>): Promise<number> => {
     return this.client.post('exchangerate', { json: exchangeRate });
   };
   // deleteAttachable(idOrEntity: string | Attachable): Promise<Attachable> => {
