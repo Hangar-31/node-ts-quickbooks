@@ -539,7 +539,13 @@ export default class QuickbooksOnline extends Quickbooks {
   findCreditMemos = (statement: string): Promise<CreditMemo[]> => {
     return this.client.get('query', { searchParams: { query: statement } });
   };
-  findCustomers = (statement: string): Promise<Customer[]> => {
+  findCustomers = (
+    statement: string
+  ): Promise<{
+    Customer: Customer[];
+    startPosition: number;
+    maxResults: number;
+  }> => {
     return this.client.get('query', { searchParams: { query: statement } });
   };
   findCustomerTypes = (statement: string): Promise<CustomerType[]> => {
@@ -567,7 +573,9 @@ export default class QuickbooksOnline extends Quickbooks {
     if (includeLink) opts.searchParams.include = 'invoiceLink';
     return this.client.get('query', opts);
   };
-  findItems = (statement: string): Promise<Item[]> => {
+  findItems = (
+    statement: string
+  ): Promise<{ Item: Item[]; startPosition: number; maxResults: number }> => {
     return this.client.get('query', { searchParams: { query: statement } });
   };
   findJournalCodes = (statement: string): Promise<JournalCode[]> => {
