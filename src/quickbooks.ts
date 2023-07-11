@@ -112,7 +112,7 @@ export default class Quickbooks {
             if (response.statusCode === 401) {
               // Unauthorized
               let token = '';
-              if (needNewToken) token = await needNewToken();
+              if (needNewToken) token = await needNewToken(getNewToken);
 
               if (!token) throw new Error('No new token provided');
 
@@ -152,7 +152,6 @@ export default class Quickbooks {
 
     this.client = {} as Client;
     this.got = client;
-    this.client.getNewToken = getNewToken;
     const methods: HTTPAlias[] = [
       'get',
       'post',

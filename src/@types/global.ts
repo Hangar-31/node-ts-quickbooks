@@ -10,7 +10,13 @@ export type QuickbooksArgs = {
   baseUrl?: string;
   debug: boolean; // enable debugging?
   defaults?: Options;
-  needNewToken?: () => string;
+  needNewToken?: (
+    getNewToken: (
+      clientId: string,
+      clientSecret: string,
+      refresh_token: string
+    ) => Promise<AuthResponse>
+  ) => Promise<string>;
   realmId: string;
   useSandbox: boolean; // use the sandbox?
 };
@@ -29,10 +35,4 @@ export interface EntityRequestionFunction {
 export type Client = Record<
   HTTPAlias | 'deleteEntity',
   GotRequestFunction | EntityRequestionFunction
-> & {
-  getNewToken: (
-    clientId: string,
-    clientSecret: string,
-    refresh_token: string
-  ) => Promise<AuthResponse>;
-};
+>;

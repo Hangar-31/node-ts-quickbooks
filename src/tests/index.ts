@@ -40,6 +40,7 @@ const run = async () => {
     await Promise.all(
       api.item.map(async collection => {
         const name = collection.name;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         await collection.item.reduce(
           async (prom: Promise<any>, request: any) => {
