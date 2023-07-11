@@ -1,20 +1,18 @@
 import { HTTPAlias, Options } from 'got/dist/source';
 
 import { AuthResponse } from './payment';
+
 export type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
 };
 export type QuickbooksArgs = {
-  clientId: string;
-  clientSecret: string;
-  realmId: string;
   accessToken: string;
-  refreshToken: string;
-  useSandbox: boolean; // use the sandbox?
-  debug: boolean; // enable debugging?
-  onRefresh: (resp: AuthResponse) => void;
   baseUrl?: string;
+  debug: boolean; // enable debugging?
   defaults?: Options;
+  needNewToken?: () => string;
+  realmId: string;
+  useSandbox: boolean; // use the sandbox?
 };
 
 export interface GotRequestFunction {
@@ -31,4 +29,10 @@ export interface EntityRequestionFunction {
 export type Client = Record<
   HTTPAlias | 'deleteEntity',
   GotRequestFunction | EntityRequestionFunction
->;
+> & {
+  getNewToken: (
+    clientId: string,
+    clientSecret: string,
+    refresh_token: string
+  ) => Promise<AuthResponse>;
+};

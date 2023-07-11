@@ -14,8 +14,7 @@ import { AuthResponse } from './@types/payment';
 const getNewToken = async (
   clientId: string,
   clientSecret: string,
-  refresh_token: string,
-  onRefresh: (resp: AuthResponse) => void
+  refresh_token: string
 ) => {
   try {
     const resp: AuthResponse = await got
@@ -33,9 +32,7 @@ const getNewToken = async (
       })
       .json();
 
-    onRefresh(resp);
-
-    return 'Bearer ' + resp.access_token;
+    return resp;
   } catch (e: any) {
     throw ErrorHandler(e as RequestError);
   }
@@ -92,13 +89,10 @@ export default class Quickbooks {
   createClient = ({
     accessToken,
     baseUrl,
-    clientId,
-    clientSecret,
     debug = true,
     defaults,
-    onRefresh,
+    needNewToken,
     realmId,
-    refreshToken,
     useSandbox = false,
   }: QuickbooksArgs): void => {
     const prefixUrl = useSandbox
@@ -117,16 +111,14 @@ export default class Quickbooks {
           async (response: Response, retryWithMergedOptions: any) => {
             if (response.statusCode === 401) {
               // Unauthorized
+              let token = '';
+              if (needNewToken) token = await needNewToken();
 
-              const token = await getNewToken(
-                clientId,
-                clientSecret,
-                refreshToken,
-                onRefresh
-              ); // Refresh the access token
+              if (!token) throw new Error('No new token provided');
+
               const updatedOptions = {
                 headers: {
-                  Authorization: token,
+                  Authorization: 'Bearer ' + token,
                 },
               };
               // // Save for further requests
@@ -142,8 +134,11 @@ export default class Quickbooks {
         ],
         beforeRequest: [
           async (opts: Options) => {
-            // @ts-ignore
-            if (debug) console.log('opts', opts.url.href);
+            if (debug)
+              console.log(
+                'opts',
+                typeof opts.url === 'string' ? opts.url : opts.url?.href
+              );
           },
         ],
       },
@@ -157,6 +152,7 @@ export default class Quickbooks {
 
     this.client = {} as Client;
     this.got = client;
+    this.client.getNewToken = getNewToken;
     const methods: HTTPAlias[] = [
       'get',
       'post',
