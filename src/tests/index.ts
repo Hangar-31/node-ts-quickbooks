@@ -1,4 +1,4 @@
-import { EntityRequestionFunction, GotRequestFunction } from '../@types/global';
+import { EntityRequestionFunction, KyRequestFunction } from '../@types/global';
 import QuickbooksOnline from '../online';
 import api from './api.json';
 
@@ -62,7 +62,7 @@ const run = async () => {
             try {
               const method = online[
                 methodName as Exclude<keyof QuickbooksOnline, 'client' | 'got'>
-              ] as GotRequestFunction | EntityRequestionFunction;
+              ] as KyRequestFunction | EntityRequestionFunction;
               if (!method) {
                 console.log('Missing Request:', methodName);
                 return;
@@ -86,7 +86,9 @@ const run = async () => {
         );
       })
     );
-  } catch (e) {}
+  } catch (e) {
+    throw e;
+  }
 };
 
 run();

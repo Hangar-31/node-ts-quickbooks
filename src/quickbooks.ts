@@ -1,14 +1,7 @@
-import got, {
-  CancelableRequest,
-  Got,
-  HTTPAlias,
-  Options,
-  RequestError,
-  Response,
-} from 'got';
+import ky, { HTTPError, KyInstance, Options } from 'ky';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Client, QuickbooksArgs } from './@types/global';
+import { Client, HTTPAlias, QuickbooksArgs } from './@types/global';
 import { AuthResponse } from './@types/payment';
 
 const getNewToken = async (
@@ -17,30 +10,32 @@ const getNewToken = async (
   refresh_token: string
 ) => {
   try {
-    const resp: AuthResponse = await got
+    const resp: AuthResponse = await ky
       .post('https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer', {
-        form: {
-          grant_type: 'refresh_token',
-          refresh_token,
-        },
         headers: {
           Authorization: `Basic ${Buffer.from(
             `${clientId}:${clientSecret}`
           ).toString('base64')}`,
           'Content-Type': 'application/x-www-form-urlencoded',
         },
+        searchParams: {
+          grant_type: 'refresh_token',
+          refresh_token,
+        },
       })
       .json();
 
     return resp;
   } catch (e: any) {
-    throw ErrorHandler(e as RequestError);
+    if (e.name === 'HTTPError') {
+      throw ErrorHandler(e);
+    }
   }
 };
 
-const ErrorHandler = (error: RequestError): RequestError | QuickbooksError => {
-  if (error?.response?.body) {
-    const body = JSON.parse(error.response.body as string);
+const ErrorHandler = async (error: HTTPError) => {
+  if (error.response) {
+    const body = await error.response.json();
     if (body?.errors?.[0]) {
       throw new QuickbooksError(body.errors[0]);
     }
@@ -80,10 +75,10 @@ class QuickbooksError extends Error {
 
 export default class Quickbooks {
   client: Client;
-  got: Got;
+  ky: KyInstance;
   constructor() {
     this.client = {} as Client;
-    this.got = got;
+    this.ky = ky;
     return;
   }
   createClient = ({
@@ -98,7 +93,7 @@ export default class Quickbooks {
     const prefixUrl = useSandbox
       ? baseUrl || ''
       : (baseUrl || '').replace(/sandbox[.-]/, '');
-    const defaultOpts = {
+    const defaultOpts: Options = {
       headers: {
         Authorization: 'Bearer ' + accessToken,
         'Company-Id': realmId,
@@ -108,50 +103,36 @@ export default class Quickbooks {
       },
       hooks: {
         afterResponse: [
-          async (response: Response, retryWithMergedOptions: any) => {
-            if (response.statusCode === 401) {
+          async (request, options, response) => {
+            if (response.status === 401) {
               // Unauthorized
               let token = '';
               if (needNewToken) token = await needNewToken(getNewToken);
 
               if (!token) throw new Error('No new token provided');
 
-              const updatedOptions = {
-                headers: {
-                  Authorization: 'Bearer ' + token,
-                },
-              };
+              request.headers.set('Authorization', `Bearer ${token}`);
+
               // // Save for further requests
               // client.defaults.options.headers.Authorization = token;
 
               // Make a new retry
-              return retryWithMergedOptions(updatedOptions);
+              return ky(request);
             }
 
             // No changes otherwise
             return response;
           },
         ],
-        beforeRequest: [
-          async (opts: Options) => {
-            if (debug)
-              console.log(
-                'opts',
-                typeof opts.url === 'string' ? opts.url : opts.url?.href
-              );
-          },
-        ],
       },
       prefixUrl,
     };
-    const opts = defaults
-      ? got.mergeOptions(defaultOpts, defaults)
-      : defaultOpts;
 
-    const client = got.extend(opts);
+    let kyClient = ky.create(defaultOpts);
+    if (defaults) kyClient = kyClient.extend(defaults);
 
     this.client = {} as Client;
-    this.got = client;
+    this.ky = kyClient;
     const methods: HTTPAlias[] = [
       'get',
       'post',
@@ -166,10 +147,10 @@ export default class Quickbooks {
         options?: Options
       ): Promise<ReturnType> => {
         try {
-          const request = client(url, {
+          const request = kyClient(url, {
             ...options,
             method,
-          }) as CancelableRequest<ReturnType>;
+          });
           const data = (await request.json()) as Record<string, any>;
           if (data) {
             const keys = Object.keys(data);
@@ -178,10 +159,11 @@ export default class Quickbooks {
           }
           return data as ReturnType;
         } catch (e: any) {
-          throw ErrorHandler(e as RequestError);
+          throw ErrorHandler(e);
         }
       };
     });
+    this.client.extend = kyClient.extend;
 
     this.client.deleteEntity = async <ReturnType>(
       url: string,
@@ -194,20 +176,29 @@ export default class Quickbooks {
           const entity: Record<string, any> = await this.client.get(
             url + idOrEntity
           );
-          const opts = client.mergeOptions(options || {}, {
+
+          const opts = {
+            ...(options || {}),
             json: entity,
-            searchParams: { operation: 'delete' },
-          });
+            searchParams: {
+              operation: 'delete',
+            },
+          };
+
           return this.client.post(url, opts);
         }
-        const opts = client.mergeOptions(options || {}, {
+
+        const opts = {
+          ...(options || {}),
           json: idOrEntity,
-          searchParams: { operation: 'delete' },
-        });
+          searchParams: {
+            operation: 'delete',
+          },
+        };
         // if the option is an entity, delete it
         return this.client.post(url, opts);
       } catch (e: any) {
-        throw ErrorHandler(e as RequestError);
+        throw ErrorHandler(e);
       }
     };
   };

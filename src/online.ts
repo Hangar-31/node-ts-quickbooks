@@ -214,7 +214,7 @@ export default class QuickbooksOnline extends Quickbooks {
   };
   sendEstimatePdf = (id: string, sendTo?: string): Promise<Estimate> => {
     return this.client.post('estimate/' + id + '/send', {
-      searchParams: { sendTo },
+      searchParams: { sendTo: sendTo || '' },
     });
   };
   getInvoice = (id: string): Promise<Invoice> => {
@@ -272,7 +272,7 @@ export default class QuickbooksOnline extends Quickbooks {
     sendTo?: string
   ): Promise<SalesReceipt> => {
     return this.client.post('salesreceipt/' + id + '/send', {
-      searchParams: { sendTo },
+      searchParams: { sendTo: sendTo || '' },
     });
   };
   getTaxAgency = (id: string): Promise<TaxAgency> => {
@@ -492,7 +492,7 @@ export default class QuickbooksOnline extends Quickbooks {
   deleteRefundReceipt = (
     idOrEntity: string | RefundReceipt
   ): Promise<RefundReceipt> => {
-    return this.client.delete('refundreceipt', idOrEntity);
+    return this.client.deleteEntity('refundreceipt', idOrEntity);
   };
   deleteSalesReceipt = (
     idOrEntity: string | SalesReceipt

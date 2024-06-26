@@ -1,4 +1,4 @@
-import { HTTPAlias, Options } from 'got/dist/source';
+import { KyInstance, Options } from 'ky';
 
 import { AuthResponse } from './payment';
 
@@ -15,13 +15,13 @@ export type QuickbooksArgs = {
       clientId: string,
       clientSecret: string,
       refresh_token: string
-    ) => Promise<AuthResponse>
+    ) => Promise<AuthResponse | undefined>
   ) => Promise<string>;
   realmId: string;
   useSandbox: boolean; // use the sandbox?
 };
 
-export interface GotRequestFunction {
+export interface KyRequestFunction {
   <ReturnType>(url: string, options?: Options): Promise<ReturnType>;
 }
 
@@ -32,7 +32,15 @@ export interface EntityRequestionFunction {
     options?: Options
   ): Promise<ReturnType>;
 }
-export type Client = Record<
-  HTTPAlias | 'deleteEntity',
-  GotRequestFunction | EntityRequestionFunction
->;
+export type Client = {
+  deleteEntity: EntityRequestionFunction;
+  extend: (defaultOptions: Options) => KyInstance;
+  get: KyRequestFunction;
+  post: KyRequestFunction;
+  put: KyRequestFunction;
+  delete: KyRequestFunction;
+  patch: KyRequestFunction;
+  head: KyRequestFunction;
+};
+
+export type HTTPAlias = 'get' | 'post' | 'put' | 'delete' | 'patch' | 'head';
