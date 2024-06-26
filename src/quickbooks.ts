@@ -29,6 +29,8 @@ const getNewToken = async (
   } catch (e: any) {
     if (e.name === 'HTTPError') {
       throw ErrorHandler(e);
+    } else {
+      throw e;
     }
   }
 };
