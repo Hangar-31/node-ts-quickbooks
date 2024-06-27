@@ -3,18 +3,18 @@
     "files": true
   },
   "compilerOptions": {
+    "module": "ESNext",       // Use ESNext modules
+    "target": "ES6",          // Target ES6 or later
+    "moduleResolution": "node", // Use Node.js style module resolution
+    "esModuleInterop": true,  // Enable compatibility with CommonJS
     "baseUrl": "src",
     "skipLibCheck": true,
-    "target": "es6",
-    "module": "commonjs",
     "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "react",
     "declaration": true,
     "outDir": "dist",
     "strict": true,
-    "moduleResolution": "node",
     "typeRoots": ["node_modules/@types"],
-    "esModuleInterop": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true
